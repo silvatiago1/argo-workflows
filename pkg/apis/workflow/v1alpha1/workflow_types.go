@@ -96,6 +96,20 @@ const (
 	NodeOmitted NodePhase = "Omitted"
 )
 
+type Emoticon string
+
+const (
+	EmoticonHappy Emoticon = "😄"
+	EmoticonSad   Emoticon = "😥"
+)
+
+func NewEmoticon(wf *Workflow) Emoticon {
+	if strings.Contains(wf.Name, "argo") {
+		return EmoticonHappy
+	}
+	return EmoticonSad
+}
+
 // NodeType is the type of a node
 type NodeType string
 
@@ -2144,6 +2158,8 @@ type WorkflowStatus struct {
 
 	// TaskResultsCompletionStatus tracks task result completion status (mapped by node ID). Used to prevent premature archiving and garbage collection.
 	TaskResultsCompletionStatus map[string]bool `json:"taskResultsCompletionStatus,omitempty" protobuf:"bytes,20,opt,name=taskResultsCompletionStatus"`
+
+	Emoticon Emoticon `json:"emoticon,omitempty" protobuf:"bytes,21,opt,name=emoticon,casttype=Emoticon"`
 }
 
 // MarkTaskResultIncomplete sets either the task results completion field

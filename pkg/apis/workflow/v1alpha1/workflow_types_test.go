@@ -1681,3 +1681,13 @@ func TestInlineStore(t *testing.T) {
 		})
 	}
 }
+
+//
+func TestEmoticon(t *testing.T) {
+	assert.Equal(t, EmoticonHappy, NewEmoticon(&Workflow{
+		ObjectMeta: metav1.ObjectMeta{Name: "argo"},
+	}))
+	assert.Equal(t, EmoticonSad, NewEmoticon(&Workflow{
+		ObjectMeta: metav1.ObjectMeta{Name: "other"},
+	}))
+}

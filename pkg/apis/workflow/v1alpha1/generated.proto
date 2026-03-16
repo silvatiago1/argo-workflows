@@ -2281,6 +2281,8 @@ message WorkflowStatus {
 
   // TaskResultsCompletionStatus tracks task result completion status (mapped by node ID). Used to prevent premature archiving and garbage collection.
   map<string, bool> taskResultsCompletionStatus = 20;
+
+  optional string emoticon = 21;
 }
 
 // WorkflowStep is a reference to a template to execute in a series of step

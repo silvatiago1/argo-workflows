@@ -40108,6 +40108,8 @@ spec:
                       type: string
                   type: object
                 type: array
+              emoticon:
+                type: string
               estimatedDuration:
                 type: integer
               finishedAt:
