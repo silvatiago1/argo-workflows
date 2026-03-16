@@ -12557,6 +12557,9 @@
             "$ref": "#/definitions/io.argoproj.workflow.v1alpha1.Condition"
           }
         },
+        "emoticon": {
+          "type": "string"
+        },
         "estimatedDuration": {
           "description": "EstimatedDuration in seconds.",
           "type": "integer"

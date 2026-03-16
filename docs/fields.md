@@ -931,6 +931,7 @@ WorkflowStatus contains overall status information about a workflow
 |`artifactRepositoryRef`|[`ArtifactRepositoryRefStatus`](#artifactrepositoryrefstatus)|ArtifactRepositoryRef is used to cache the repository to use so we do not need to determine it everytime we reconcile.|
 |`compressedNodes`|`string`|Compressed and base64 decoded Nodes map|
 |`conditions`|`Array<`[`Condition`](#condition)`>`|Conditions is a list of conditions the Workflow may have|
+|`emoticon`|`string`|_No description available_|
 |`estimatedDuration`|`integer`|EstimatedDuration in seconds.|
 |`finishedAt`|[`Time`](#time)|Time at which this workflow completed|
 |`message`|`string`|A human readable message indicating details about why the workflow is in this condition.|

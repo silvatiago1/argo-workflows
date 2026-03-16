@@ -8283,6 +8283,9 @@
           },
           "type": "array"
         },
+        "emoticon": {
+          "type": "string"
+        },
         "estimatedDuration": {
           "description": "EstimatedDuration in seconds.",
           "type": "integer"
