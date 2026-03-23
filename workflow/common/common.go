@@ -135,7 +135,7 @@ const (
 	// can access the same volume mounts used in the main container. This is used for the purposes
 	// of artifact loading (when there is overlapping paths between artifacts and volume mounts),
 	// as well as artifact collection by the wait container.
-	ExecutorMainFilesystemDir = "/mainctrfs"
+	ExecutorMainFilesystemDir = "/mainctrfs" //#TODO
 
 	// ExecutorStagingEmptyDir is the path of the emptydir which is used as a staging area to transfer a file between init/main container for script/resource templates
 	ExecutorStagingEmptyDir = "/argo/staging"

@@ -207,7 +207,7 @@ func (we *WorkflowExecutor) loadArtifacts(ctx context.Context, pluginName wfv1.A
 	return nil
 }
 
-func (we *WorkflowExecutor) loadArtifact(ctx context.Context, pluginName wfv1.ArtifactPluginName, art wfv1.Artifact) error {
+func (we *WorkflowExecutor) loadArtifact(ctx context.Context, pluginName wfv1.ArtifactPluginName, art wfv1.Artifact) error { //#TODO
 	logger := logging.RequireLoggerFromContext(ctx)
 	logger.WithField("name", art.Name).Info(ctx, "Downloading artifact")
 
@@ -387,7 +387,7 @@ func (we *WorkflowExecutor) StageFiles(ctx context.Context) error {
 	return nil
 }
 
-// SaveArtifacts uploads artifacts to the archive location
+// SaveArtifacts uploads artifacts to the archive location #TODO
 func (we *WorkflowExecutor) SaveArtifacts(ctx context.Context) (wfv1.Artifacts, error) {
 	logger := logging.RequireLoggerFromContext(ctx)
 	artifacts := wfv1.Artifacts{}
@@ -533,7 +533,7 @@ func (we *WorkflowExecutor) stageArchiveFile(ctx context.Context, containerName 
 		// If we get here, we are uploading an artifact from a mirrored volume mount which the wait
 		// sidecar has direct access to. We can upload directly from the shared volume mount,
 		// instead of copying it from the container.
-		mountedArtPath := filepath.Join(common.ExecutorMainFilesystemDir, art.Path)
+		mountedArtPath := filepath.Join(common.ExecutorMainFilesystemDir, art.Path) //#TODO
 		logger.WithFields(logging.Fields{"path": art.Path, "mountedArtPath": mountedArtPath}).Info(ctx, "Staging from mirrored volume mount")
 		if strategy.None != nil {
 			fileName := filepath.Base(art.Path)
@@ -544,7 +544,7 @@ func (we *WorkflowExecutor) stageArchiveFile(ctx context.Context, containerName 
 			return fileName, mountedArtPath, nil
 		}
 		if strategy.Zip != nil {
-			fileName := fmt.Sprintf("%s.zip", art.Name)
+			fileName := fmt.Sprintf("%s.zip", art.Name) //#TODO
 			localArtPath := filepath.Join(tempOutArtDir, fileName)
 			f, err := os.Create(localArtPath)
 			if err != nil {
@@ -677,7 +677,7 @@ func (we *WorkflowExecutor) SaveParameters(ctx context.Context) error {
 		}
 
 		var output *wfv1.AnyString
-		if we.isBaseImagePath(param.ValueFrom.Path) {
+		if we.isBaseImagePath(param.ValueFrom.Path) { //#TODO
 			logger.WithField("path", param.ValueFrom.Path).Info(ctx, "Copying from base image layer")
 			fileContents, err := we.RuntimeExecutor.GetFileContents(common.MainContainerName, param.ValueFrom.Path)
 			if err != nil {
