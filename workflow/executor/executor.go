@@ -1058,7 +1058,7 @@ func untar(tarPath string, destPath string) error {
 				continue
 			}
 			target := filepath.Join(dest, filepath.Clean(header.Name))
-			//TODO
+			// TODO
 			switch header.Typeflag {
 			case tar.TypeSymlink:
 				// Validate symlink target before creating it
@@ -1084,10 +1084,18 @@ func untar(tarPath string, destPath string) error {
 			case tar.TypeReg:
 				// Before writing the file, check if the parent directory resolves outside dest
 				parentDir := filepath.Dir(target)
-
+				// Resolve the destination directory
+				_, err := filepath.EvalSymlinks(dest)
+				if err != nil {
+					return err
+				}
 				// Check if parent exists and if so, verify it doesn't resolve outside dest
 				if _, lstatErr := os.Lstat(parentDir); lstatErr == nil {
 					// Parent exists, resolve it to check for symlink traversal
+					_, evalErr := filepath.EvalSymlinks(parentDir)
+					if evalErr != nil {
+						return evalErr
+					}
 					// TODO
 				} else if !os.IsNotExist(lstatErr) {
 					return lstatErr
