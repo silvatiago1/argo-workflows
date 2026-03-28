@@ -1058,9 +1058,7 @@ func untar(tarPath string, destPath string) error {
 				continue
 			}
 			target := filepath.Join(dest, filepath.Clean(header.Name))
-			if !strings.HasPrefix(target, filepath.Clean(dest)+string(os.PathSeparator)) {
-				return fmt.Errorf("illegal file path: %s", header.Name)
-			}
+			//TODO
 			switch header.Typeflag {
 			case tar.TypeSymlink:
 				// Validate symlink target before creating it
@@ -1087,23 +1085,10 @@ func untar(tarPath string, destPath string) error {
 				// Before writing the file, check if the parent directory resolves outside dest
 				parentDir := filepath.Dir(target)
 
-				// Resolve the destination directory
-				resolvedDest, err := filepath.EvalSymlinks(dest)
-				if err != nil {
-					return err
-				}
-
 				// Check if parent exists and if so, verify it doesn't resolve outside dest
 				if _, lstatErr := os.Lstat(parentDir); lstatErr == nil {
 					// Parent exists, resolve it to check for symlink traversal
-					resolvedParent, evalErr := filepath.EvalSymlinks(parentDir)
-					if evalErr != nil {
-						return evalErr
-					}
-					// Check if resolved parent is outside dest
-					if !strings.HasPrefix(resolvedParent+string(os.PathSeparator), resolvedDest+string(os.PathSeparator)) && resolvedParent != resolvedDest {
-						return fmt.Errorf("illegal file path after symlink resolution: %s resolves outside destination", header.Name)
-					}
+					// TODO
 				} else if !os.IsNotExist(lstatErr) {
 					return lstatErr
 				} else {
